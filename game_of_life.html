@@ -3,15 +3,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <link id="style_sheet" rel="StyleSheet" href="./style.css" type="text/css" />
+    <link id="style_sheet" rel="StyleSheet" href="./style/style.css" type="text/css" />
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    <script type = "text/javascript" src = "script.js"></script>
     
+
+
+
+    <script type = "text/javascript" src = "./scripts/script.js">
+    </script>
     <title>Sujeet's Webpage</title>
   </head>
 
 
-  <body onload="os_check(); browser_check();">
+  <body onload="os_check(); browser_check(); show_infi_alert();">
     <div id = "container">
       <div id = "headingbox">
 	<div id ="browser">
@@ -34,35 +38,39 @@
       <div id = "menu" >
 	<ul>
 	  <li>
-	    <a href = "http://www.cse.iitm.ac.in/~sujeet/">Home</a>
+	    <a href = "./index.html">Home</a>
 	  </li>
 	  <li>
-	    <a href = "http://www.cse.iitm.ac.in/~sujeet/courses.html">Courses undertaken</a>
+	    <a href = "./courses.html">Courses undertaken</a>
 	  </li>
 	  <!-- <li> -->
-	  <!--   <a href = "http://www.cse.iitm.ac.in/~sujeet/pics.html">Photo gallery</a> -->
+	  <!--   <a href = "./pics.html">Photo gallery</a> -->
 	  <!-- </li> -->
 	  <li>
-	    <a href = "http://www.cse.iitm.ac.in/~sujeet/roman_to_decimal.html">Roman to <br/> decimal <br/> convertor</a>
+	    <a href = "./roman_to_decimal.html">Roman to <br/> decimal <br/> convertor</a>
 	  </li>
 	  <li>
-	    <a href = "http://www.cse.iitm.ac.in/~sujeet/game_of_life.html">Game of life</a>
+	    <a href = "./game_of_life.html">Game of life</a>
 	  </li>
 	</ul>
-      </div>  
+      </div>     
       <div id = "content">
-	<h3>This is a simple simulation of Conway's Game of Life...</h3>
-        <p>Click in the black area to bring cells to life.
+        
+
+<h3>This is a simple simulation of Conway's Game of Life...</h3>
+<p>Click in the black area to bring cells to life.
 	</p>
-	<object data = "./gol.html" style = "width:500px; height:520px"></object>
-	<div id = "info" style = "width:35%;float:right">
-	  <p>&nbsp;&nbsp;&nbsp;The <b>Game of Life</b>, also known simply as <b>Life</b>, is a cellular automaton devised by the British mathematician John Horton Conway in 1970.
+<object data="./gol.html" style="width:500px; height:520px"></object>
+<div id="info" style="width:35%;float:right">
+<p>&nbsp;&nbsp;&nbsp;The <b>Game of Life</b>, also known simply as <b>Life</b>, is a cellular automaton devised by the British mathematician John Horton Conway in 1970.
 	  </p>
-	  <p>&nbsp;&nbsp;&nbsp;The "game" is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves.
+<p>&nbsp;&nbsp;&nbsp;The "game" is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves.
 	  </p>
-	  <p>&nbsp;&nbsp;&nbsp;Source : <a href = "http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Wikipedia</a>
-	  </p>
-	</div>
+<p>&nbsp;&nbsp;&nbsp;Source : <a href="http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Wikipedia</a>
+</p>
+</div>
+
+
       </div>
       <div id = "footer">
 	<!-- <p>  -->
@@ -81,17 +89,6 @@
 	<!-- </p> -->
       </div>    
     </div>
-
-
-
   </body>
-
-
-
 </html>
-
-
-
-
-
 
