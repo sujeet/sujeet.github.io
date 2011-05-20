@@ -1,83 +1,28 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-
-<html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <link id="style_sheet" rel="StyleSheet" href="./style/style.css" type="text/css" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    
-
-
-
-    <script type = "text/javascript" src = "./scripts/script.js">
-    </script>
-    <title>Sujeet's Webpage</title>
-  </head>
-
-
-  <body onload="os_check(); browser_check(); show_infi_alert();">
-    <div id = "container">
-      <div id = "headingbox">
-        <div id ="browser">
-          <b>
-            <img src ="" id = "browser_img" alt="browser"/>
-          Your browser</b>
-        </div>
-        
-        <div id = "os">
-          <b>
-            <img src ="" id = "os_img" alt="os"/>
-          Your os</b>
-        </div>
-        
-        <div id = "heading">
-          <h1 id= "heading_text">Sujeet Gholap's personal webpage</h1>
-        </div>
-      </div>
-      
-      <div id = "menu" >
-        <ul>
-          <li>
-            <a href = "./index.html">Home</a>
-          </li>
-          <li>
-            <a href = "./courses.html">Courses undertaken</a>
-          </li>
-          <!-- <li> -->
-          <!--   <a href = "./pics.html">Photo gallery</a> -->
-          <!-- </li> -->
-          <li>
-            <a href = "./roman_to_decimal.html">Roman to <br/> decimal <br/> convertor</a>
-          </li>
-          <li>
-            <a href = "./game_of_life.html">Game of life</a>
-          </li>
-        </ul>
-      </div>     
-      <div id = "content">
-        
-
-<img src="./images/under_construction.png" alt="This page is under construction..." width="400" height="300" />
-
-
-      </div>
-      <div id = "footer">
-        <p>
-        <!--   <a href="http://jigsaw.w3.org/css-validator/check/referer"> -->
-        <!--     <img style="border:0;width:88px;height:31px;float:right" -->
-        <!-- 	 src="http://jigsaw.w3.org/css-validator/images/vcss" -->
-        <!-- 	 alt="Valid CSS!" /> -->
-        <!--   </a> -->
-
-        <a href="http://validator.w3.org/check?uri=referer">
-          <img
-              style="border:0;width:88px;height:31px;float:right"
-              src="http://www.w3.org/Icons/valid-xhtml11"
-              alt="Valid XHTML 1.1"/>
-        </a>
-      </p>
-    </div>    
-  </div>
-</body>
-</html>
-
+<?xml version="1.0" encoding="UTF-8"?>
+<table xmlns="http://query.yahooapis.com/v1/schema/table.xsd">
+  <meta>
+    <author>Paul Daniel and Hugo Lopes Tavares</author>
+    <documentationURL>http://apiwiki.twitter.com/Twitter-API-Documentation</documentationURL>
+    <sampleQuery>select * from {table} where screen_name=@screen_name</sampleQuery>
+  </meta>
+  <bindings>
+    <select itemPath="statuses" produces="XML">
+      <urls>
+        <url>http://twitter.com/statuses/user_timeline.{format}</url>
+      </urls>
+      <paging model="page">
+        <start default="0" id="page"/>
+        <pagesize max="200" id="count"/>
+        <total default="20"/>
+      </paging>
+      <inputs>
+        <key id="since" type="xs:string" paramType="query"/>
+        <key id="since_id" type="xs:string" paramType="query"/>
+        <key id="id" type="xs:string" paramType="query" required="false"/>
+        <key id="screen_name" type="xs:string" paramType="query" required="false"/>
+        <key id="format" type="xs:string" paramType="path" required="false" default="xml"/>
+        <key id="total" type="xs:string" paramType="query" default="35"/>
+      </inputs>
+    </select>
+  </bindings>
+</table>
