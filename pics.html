@@ -1,13 +1,24 @@
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;                                                                         ;;
 ;; This is a hacked up version of htmlize.el in which all "htmlize" was    ;;
 ;; replaced by "blog-htmlize" and some minor changes were made in order to ;;
 ;; get an output with stripped html header and no body tag, as the purpose ;;
 ;; was to get divs of code snippets ready to be inserted into a blog post. ;;
+;; inline style is used so that global css for the blog does not meddle w- ;;
+;; -ith the css of the code.                                               ;;
+;;                                                                         ;;
+;;   New functions have been added which produce the styled div with line  ;;
+;; numbers.                                                                ;;
+;;                                                                         ;;
+;;  You might find the following four functions particularly useful.       ;;
+;;                                                                         ;;
+;;  blog-htmlize-region                                                    ;;
+;;  blog-htmlize-region-with-linum                                         ;;
+;;  blog-htmlize-buffer                                                    ;;
+;;  blog-htmlize-buffer-with-linum                                         ;;
 ;;                                                                         ;;
 ;;  all the original comments etc have been kept intact, and functions for ;;
-;; inline css and fontface have been removed.                              ;;
+;; fontface have been removed.                                             ;;
 ;;                                                                         ;;
 ;;                         - Sujeet Gholap (who hacked this up)            ;;
 ;;                                                                         ;;
@@ -145,7 +156,7 @@
   :type 'string
   :group 'blog-htmlize)
 
-(defcustom blog-htmlize-output-type 'css
+(defcustom blog-htmlize-output-type 'inline-css
   "*Output type of generated HTML, one of `css', `inline-css', or `font'.
 When set to `css' (the default), blog-htmlize will generate a style sheet
 with description of faces, and use it in the HTML document, specifying
@@ -1303,7 +1314,7 @@ it's called with the same value of KEY.  All other times, the cached
 
 (defun blog-htmlize-default-body-tag (face-map)
   nil					; no doc-string
-  "<div class='body'>")
+  "<div class='code-body'>")
 
 ;;; CSS based output support.
 
@@ -1432,6 +1443,8 @@ it's called with the same value of KEY.  All other times, the cached
 	(insert (blog-htmlize-method body-tag face-map)
 		"\n    ")
 	(put places 'content-start (point-marker))
+    (if show-number-list
+        (insert (make-linum-div-for-blog-htmlize number-of-lines)))
 	(insert "<pre>\n"))
       (let ((insert-text-method
 	     ;; Get the inserter method, so we can funcall it inside
@@ -1591,6 +1604,114 @@ See `blog-htmlize-buffer' for details."
       (switch-to-buffer htmlbuf))
     htmlbuf))
 
+;; ---------------------------------------------------------
+;; ---------the additional code for line numbers------------
+;; ---------------------------------------------------------
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;                                                                    ;;
+;; This is a hack. I just started coding in Emacs lisp and the        ;;
+;; objective was to get the line numbers working more than modularity ;;
+;; of code and such things. I am yet to figure out how to avoid the   ;;
+;; code duplication I have done. I am not sure whether using global   ;;
+;; variables to do stuff is good or not. I have used global variables ;;
+;; so as to avoid modifying the pre-existing code.                    ;;
+;;                                                                    ;;
+;; Will try to fix all these issues as and when I get time.           ;;
+;;                                                                    ;;
+;; Tested in gnu-emacs 23.3                                           ;;
+;;                                                                    ;;
+;;                                                 -Sujeet Gholap     ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; variable to which tells whether numberlist should be inserted into
+;; the output or not.
+(defvar show-number-list nil)
+
+(defvar number-of-lines 0)
+
+(defun blog-htmlize-region-with-linum (beg end)
+  (interactive "r")
+  (setq show-number-list 1)
+  (setq number-of-lines (count-lines beg end))
+  ;; Don't let zmacs region highlighting end up in HTML.
+  (when (fboundp 'zmacs-deactivate-region)
+    (zmacs-deactivate-region))
+  (let ((htmlbuf (save-restriction
+		   (narrow-to-region beg end)
+		   (blog-htmlize-buffer-1))))
+    (setq show-number-list nil)
+    (when (interactive-p)
+      (switch-to-buffer htmlbuf))
+    htmlbuf))
+
+(defun blog-htmlize-buffer-with-linum (&optional buffer)
+  "Convert BUFFER to HTML, preserving colors and decorations.
+  
+   WITH LINE NUMBERS
+
+The generated HTML is available in a new buffer, which is returned.
+When invoked interactively, the new buffer is selected in the current
+window.  The title of the generated document will be set to the buffer's
+file name or, if that's not available, to the buffer's name.
+
+Note that blog-htmlize doesn't fontify your buffers, it only uses the
+decorations that are already present.  If you don't set up font-lock or
+something else to fontify your buffers, the resulting HTML will be
+plain.  Likewise, if you don't like the choice of colors, fix the mode
+that created them, or simply alter the faces it uses."
+  (interactive)
+  (setq show-number-list 1)
+  (setq number-of-lines (count-lines (point-min) (point-max)))
+  (let ((htmlbuf (with-current-buffer (or buffer (current-buffer))
+		   (blog-htmlize-buffer-1))))
+    (setq show-number-list nil)
+    (when (interactive-p)
+      (switch-to-buffer htmlbuf))
+    htmlbuf))
+
+(defun make-linum-div-for-blog-htmlize (number-of-lines)
+  "Creates the html code for a div in which a pre tag contains
+   a vertical list of natural numbers from 1 to number-of-lines
+   both inclusive."
+  
+  (defun right-align (number padding)
+    (concat (make-string padding ? )
+            (number-to-string number)))
+
+  (defun get-padding-amount (number longest-number)
+    (- (length (number-to-string longest-number))
+       (length (number-to-string number))))
+
+  (defun beautify-number (number condition)
+    "Applies additional css to numbers satisfying condition"
+    (let ((padding (get-padding-amount number number-of-lines))
+          (styling "font-weight:bold;"))
+      (if (funcall condition number)
+          (format "<span style='%s'>%s</span>" 
+                  styling
+                  (right-align number padding))
+        (format "%s" (right-align number padding)))))
+
+  (defun make-pre-tag-contents (end-number)
+    (defun list-maker-iter (string count)
+      (if (<= count end-number)
+          (list-maker-iter (concat string
+                                   (beautify-number count 
+                                                    (lambda (x) 
+                                                      (= (% x 5) 0)))
+                                   "\n")
+                           (+ count 1))
+        string))
+    (list-maker-iter "" 1))
+
+  (concat "<div style='background: rgba(255, 255, 255, 0.1); float: left; padding-left: 5px; margin-right: 5px; padding-right: 2px'><pre>"
+          (concat (make-pre-tag-contents number-of-lines)
+                  "</pre></div>")))
+;; ---------------------------------------------------------
+;; ---------the additional code for line numbers------------
+;; ----------------------ends here--------------------------
+;; ---------------------------------------------------------
+
 (defun blog-htmlize-region-for-paste (beg end)
   "Blog-Htmlize the region and return just the HTML as a string.
 This forces the `inline-css' style and only returns the HTML body,
@@ -1729,6 +1850,28 @@ corresponding source file."
   "Blog-Htmlize dired-marked files."
   (interactive "P")
   (blog-htmlize-many-files (dired-get-marked-files nil arg) target-directory))
+
+(defun blog-htmlize-inline-css-body-tag (face-map)
+  (format "<div class='code-body' style=\"overflow : auto; %s\">"
+	  (mapconcat #'identity (blog-htmlize-css-specs (gethash 'default face-map))
+		     " ")))
+
+(defun blog-htmlize-inline-css-insert-text (text fstruct-list buffer)
+  (let* ((merged (blog-htmlize-merge-faces fstruct-list))
+	 (style (blog-htmlize-memoize
+		 merged
+		 (let ((specs (blog-htmlize-css-specs merged)))
+		   (and specs
+			(mapconcat #'identity (blog-htmlize-css-specs merged) " "))))))
+    (when style
+      (princ "<span style=\"" buffer)
+      (princ style buffer)
+      (princ "\">" buffer))
+    (princ text buffer)
+    (when style
+      (princ "</span>" buffer))))
+
+
 
 (provide 'blog-htmlize)
 
