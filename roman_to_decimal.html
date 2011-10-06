@@ -1,142 +1,150 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <link id="style_sheet" rel="StyleSheet" href="./style/style.css" type="text/css" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    
-
-<link id="calcgadget_style_sheet" rel="StyleSheet" href="./style/calcgadget.css" type="text/css" />
-<script type="text/javascript" src="./scripts/r2d.js">
-</script>
-
-
-    <script type = "text/javascript" src = "./scripts/script.js">
-    </script>
-    <title>Sujeet's Webpage</title>
-  </head>
-
-
-  <body onload="os_check(); browser_check(); show_infi_alert();">
-    <div id = "container">
-      <div id = "headingbox">
-        <div id ="browser">
-          <b>
-            <img src ="" id = "browser_img" alt="browser"/>
-          Your browser</b>
-        </div>
-        
-        <div id = "os">
-          <b>
-            <img src ="" id = "os_img" alt="os"/>
-          Your os</b>
-        </div>
-        
-        <div id = "heading">
-          <h1 id= "heading_text">Sujeet Gholap's personal webpage</h1>
-        </div>
-      </div>
-      
-      <div id = "menu" >
-        <ul>
-          <li>
-            <a href = "./index.html">Home</a>
-          </li>
-          <li>
-            <a href = "./courses.html">Courses undertaken</a>
-          </li>
-          <!-- <li> -->
-          <!--   <a href = "./pics.html">Photo gallery</a> -->
-          <!-- </li> -->
-          <li>
-            <a href = "./roman_to_decimal.html">Roman to <br/> decimal <br/> convertor</a>
-          </li>
-          <li>
-            <a href = "./game_of_life.html">Game of life</a>
-          </li>
-        </ul>
-      </div>     
-      <div id = "content">
-        
-
-<h3>Roman to decimal converter...</h3>
-<p>&nbsp;&nbsp;&nbsp; The notable thing about this converter is that it does not accept the input if the input is not a valid roman number.</p>
-<div id="calcgadget" class="rounded shadow">
-<table>
-<tr>
-<th>Roman :
-	      </th>
-<td id="roman" align="center">
-</td>
-</tr>
-<tr>
-<th>Decimal :
-	      </th>
-<td id="decimal" align="center">
-</td>
-</tr>
-<tr>
-<td>
-<button class="button black" style="width:80px" onclick="reset()">Reset</button>
-</td>
-<td>
-<button class="button black" style="width:80px" onclick="backspace()">Backspace</button>
-</td>
-</tr>
-<tr>
-<td>
-<button class="button black" style="width:80px" onclick="pressed('I')">I</button>
-</td>
-<td>
-<button class="button black" style="width:80px" onclick="pressed('V')">V</button>
-</td>
-</tr>
-<tr>
-<td>
-<button class="button black" style="width:80px" onclick="pressed('X')">X</button>
-</td>
-<td>
-<button class="button black" style="width:80px" onclick="pressed('L')">L</button>
-</td>
-</tr>
-<tr>
-<td>
-<button class="button black" style="width:80px" onclick="pressed('C')">C</button>
-</td>
-<td>
-<button class="button black" style="width:80px" onclick="pressed('D')">D</button>
-</td>
-</tr>
-</table>
-<table>
-<tr>
-<td>
-<button class="button black" style="width:170px" onclick="pressed('M')">M</button>
-</td>
-</tr>
-</table>
-</div>
-
-
-      </div>
-      <div id = "footer">
-        <p>
-        <!--   <a href="http://jigsaw.w3.org/css-validator/check/referer"> -->
-        <!--     <img style="border:0;width:88px;height:31px;float:right" -->
-        <!-- 	 src="http://jigsaw.w3.org/css-validator/images/vcss" -->
-        <!-- 	 alt="Valid CSS!" /> -->
-        <!--   </a> -->
-
-        <a href="http://validator.w3.org/check?uri=referer">
-          <img
-              style="border:0;width:88px;height:31px;float:right"
-              src="http://www.w3.org/Icons/valid-xhtml11"
-              alt="Valid XHTML 1.1"/>
-        </a>
-      </p>
-    </div>    
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <link id="style_sheet" rel="StyleSheet" href="./css/style.css" type="text/css" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link id="calcgadget_style_sheet" rel="StyleSheet" href="./css/calcgadget.css" type="text/css" />
+  <script type="text/javascript" src="./js/roman_to_decimal.js">
+  </script>
+  <script type="text/javascript" src="./js/script.js">
+  </script>
+  <title>
+   Sujeet's Webpage
+  </title>
+ </head>
+ <body>
+  <div id="container">
+   <div id="headingbox">
+    <div id="heading">
+     <h1 id="heading_text">
+      Sujeet Gholap's personal webpage
+     </h1>
+    </div>
+   </div>
+   <div id="menu">
+    <ul>
+     <li>
+      <a href="./index.html">
+       Home
+      </a>
+     </li>
+     <li>
+      <a href="./courses.html">
+       Courses undertaken
+      </a>
+     </li>
+     <li>
+      <a href="./roman_to_decimal.html">
+       Roman to
+       <br />
+       decimal
+       <br />
+       convertor
+      </a>
+     </li>
+     <li>
+      <a href="./game_of_life.html">
+       Game of life
+      </a>
+     </li>
+    </ul>
+   </div>
+   <div id="content">
+    <h3>
+     Roman to decimal converter
+    </h3>
+    <p>
+     &nbsp;&nbsp;&nbsp; The notable thing about this converter is that it does not accept the input if the input is not a valid roman number.
+    </p>
+    <div id="calcgadget" class="rounded shadow">
+     <table>
+      <tr>
+       <th>
+        Roman :
+       </th>
+       <td id="roman" align="center">
+       </td>
+      </tr>
+      <tr>
+       <th>
+        Decimal :
+       </th>
+       <td id="decimal" align="center">
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <button class="button black" style="width:80px" id="resetButton">
+         Reset
+        </button>
+       </td>
+       <td>
+        <button class="button black" style="width:80px" id="backSpaceButton">
+         Backspace
+        </button>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <button class="button black romanCharButton" style="width:80px">
+         I
+        </button>
+       </td>
+       <td>
+        <button class="button black romanCharButton" style="width:80px">
+         V
+        </button>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <button class="button black romanCharButton" style="width:80px">
+         X
+        </button>
+       </td>
+       <td>
+        <button class="button black romanCharButton" style="width:80px">
+         L
+        </button>
+       </td>
+      </tr>
+      <tr>
+       <td>
+        <button class="button black romanCharButton" style="width:80px">
+         C
+        </button>
+       </td>
+       <td>
+        <button class="button black romanCharButton" style="width:80px">
+         D
+        </button>
+       </td>
+      </tr>
+     </table>
+     <table>
+      <tr>
+       <td>
+        <button class="button black romanCharButton" style="width:170px">
+         M
+        </button>
+       </td>
+      </tr>
+     </table>
+    </div>
+   </div>
+   <div id="footer">
+    <p>
+     <!--   <a href="http://jigsaw.w3.org/css-validator/check/referer"> -->
+     <!--     <img style="border:0;width:88px;height:31px;float:right" -->
+     <!-- 	 src="http://jigsaw.w3.org/css-validator/images/vcss" -->
+     <!-- 	 alt="Valid CSS!"  /> -->
+     <!--   </a> -->
+     <a href="http://validator.w3.org/check?uri=referer">
+      <img style="border:0;width:88px;height:31px;float:right" src="http://www.w3.org/Icons/valid-xhtml11" alt="Valid XHTML 1.1" />
+     </a>
+    </p>
+   </div>
   </div>
-</body>
+ </body>
 </html>
-

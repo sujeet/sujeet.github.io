@@ -24,11 +24,16 @@ for file_name in file_list :
     data = f.read()
     f.close()
     soup = BeautifulSoup(data)
-    head_contents = "\n" + "".join([str(x) for x in soup.head.contents]) + "\n"
-    content_contents = "\n" + "".join([str(x) for x in soup.findAll(id="content")[0].contents]) + "\n"
+    head_contents = ("\n"
+                     + "".join([str(x) for x in soup.head.contents])
+                     + "\n")
+    content_contents = ("\n"
+                        + "".join([str(x) for x in soup.findAll(id="content")[0].contents])
+                        + "\n")
     new_data = template_string.replace("<!-- content goes here -->", content_contents)
     new_data = new_data.replace("<!-- additional links to css js here -->", head_contents)
-    new_file = open(file_name.replace("_content", ""), 'w')
+    new_data = BeautifulSoup (new_data).prettify ()
+    new_file = open("../" + file_name.replace("_content", ""), 'w')
     new_file.write(new_data)
     new_file.close()
 

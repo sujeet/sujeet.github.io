@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script type="text/javascript" src="./js/game_of_life.js"></script>
+  </head>
+  <body>
+    <div id = "content">
+
+	  <p>This is a simple simulation of Conway's Game of Life
+        using the canvas element from HTML5.
+        Click in the black area to bring cells to life.
+	  </p>
+
+      <div style = "width:450px; float:left;">
+        <canvas id = "game_of_life"></canvas>
+        <button id = "step" style = "width : 145px">Step</button>
+        <button id = "play" style = "width : 150px">Play</button>
+        <button id = "pause" style = "width : 145px">Pause</button>
+        <button id = "reset" style = "width : 448px">Reset</button>
+      </div>
+
+	  <div id = "info" style = "width:35%;float:right">
+	    <p>&nbsp;&nbsp;&nbsp;The <b>Game of Life</b>, also known simply as <b>Life</b>,
+          is a cellular automaton devised by the British mathematician John Horton Conway in 1970.
+	    </p>
+	    <p>&nbsp;&nbsp;&nbsp;The "game" is a zero-player game,
+          meaning that its evolution is determined by its initial state,
+          requiring no further input.
+          One interacts with the Game of Life by creating an initial configuration and observing how it evolves.
+	    </p>
+	    <p>&nbsp;&nbsp;&nbsp;Source : <a href = "http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Wikipedia</a>
+	    </p>
+	  </div>
+
+    </div>
+  </body>
+</html>

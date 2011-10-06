@@ -1,3 +1,13 @@
 #ignore the autosave or backup files by gedit and emacs
 *~
 *#
+*.pyc
+log*
+*.zip
+.ropeproject
+django_media_main_site
+erp/
+media
+userportal/
+webbed_feet backup/
+webbed_feet/

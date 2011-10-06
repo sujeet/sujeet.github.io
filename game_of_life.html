@@ -1,94 +1,115 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
-
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-    <link id="style_sheet" rel="StyleSheet" href="./style/style.css" type="text/css" />
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-    
-
-
-
-    <script type = "text/javascript" src = "./scripts/script.js">
-    </script>
-    <title>Sujeet's Webpage</title>
-  </head>
-
-
-  <body onload="os_check(); browser_check(); show_infi_alert();">
-    <div id = "container">
-      <div id = "headingbox">
-        <div id ="browser">
-          <b>
-            <img src ="" id = "browser_img" alt="browser"/>
-          Your browser</b>
-        </div>
-        
-        <div id = "os">
-          <b>
-            <img src ="" id = "os_img" alt="os"/>
-          Your os</b>
-        </div>
-        
-        <div id = "heading">
-          <h1 id= "heading_text">Sujeet Gholap's personal webpage</h1>
-        </div>
-      </div>
-      
-      <div id = "menu" >
-        <ul>
-          <li>
-            <a href = "./index.html">Home</a>
-          </li>
-          <li>
-            <a href = "./courses.html">Courses undertaken</a>
-          </li>
-          <!-- <li> -->
-          <!--   <a href = "./pics.html">Photo gallery</a> -->
-          <!-- </li> -->
-          <li>
-            <a href = "./roman_to_decimal.html">Roman to <br/> decimal <br/> convertor</a>
-          </li>
-          <li>
-            <a href = "./game_of_life.html">Game of life</a>
-          </li>
-        </ul>
-      </div>     
-      <div id = "content">
-        
-
-<h3>This is a simple simulation of Conway's Game of Life...</h3>
-<p>Click in the black area to bring cells to life.
-	</p>
-<object data="./gol.html" style="width:500px; height:520px"></object>
-<div id="info" style="width:35%;float:right">
-<p>&nbsp;&nbsp;&nbsp;The <b>Game of Life</b>, also known simply as <b>Life</b>, is a cellular automaton devised by the British mathematician John Horton Conway in 1970.
-	  </p>
-<p>&nbsp;&nbsp;&nbsp;The "game" is a zero-player game, meaning that its evolution is determined by its initial state, requiring no further input. One interacts with the Game of Life by creating an initial configuration and observing how it evolves.
-	  </p>
-<p>&nbsp;&nbsp;&nbsp;Source : <a href="http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">Wikipedia</a>
-</p>
-</div>
-
-
-      </div>
-      <div id = "footer">
-        <p>
-        <!--   <a href="http://jigsaw.w3.org/css-validator/check/referer"> -->
-        <!--     <img style="border:0;width:88px;height:31px;float:right" -->
-        <!-- 	 src="http://jigsaw.w3.org/css-validator/images/vcss" -->
-        <!-- 	 alt="Valid CSS!" /> -->
-        <!--   </a> -->
-
-        <a href="http://validator.w3.org/check?uri=referer">
-          <img
-              style="border:0;width:88px;height:31px;float:right"
-              src="http://www.w3.org/Icons/valid-xhtml11"
-              alt="Valid XHTML 1.1"/>
-        </a>
-      </p>
-    </div>    
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <link id="style_sheet" rel="StyleSheet" href="./css/style.css" type="text/css" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <script type="text/javascript" src="./js/game_of_life.js">
+  </script>
+  <script type="text/javascript" src="./js/script.js">
+  </script>
+  <title>
+   Sujeet's Webpage
+  </title>
+ </head>
+ <body>
+  <div id="container">
+   <div id="headingbox">
+    <div id="heading">
+     <h1 id="heading_text">
+      Sujeet Gholap's personal webpage
+     </h1>
+    </div>
+   </div>
+   <div id="menu">
+    <ul>
+     <li>
+      <a href="./index.html">
+       Home
+      </a>
+     </li>
+     <li>
+      <a href="./courses.html">
+       Courses undertaken
+      </a>
+     </li>
+     <li>
+      <a href="./roman_to_decimal.html">
+       Roman to
+       <br />
+       decimal
+       <br />
+       convertor
+      </a>
+     </li>
+     <li>
+      <a href="./game_of_life.html">
+       Game of life
+      </a>
+     </li>
+    </ul>
+   </div>
+   <div id="content">
+    <p>
+     This is a simple simulation of Conway's Game of Life
+        using the canvas element from HTML5.
+        Click in the black area to bring cells to life.
+    </p>
+    <div style="width:450px; float:left;">
+     <canvas id="game_of_life">
+     </canvas>
+     <button id="step" style="width : 145px">
+      Step
+     </button>
+     <button id="play" style="width : 150px">
+      Play
+     </button>
+     <button id="pause" style="width : 145px">
+      Pause
+     </button>
+     <button id="reset" style="width : 448px">
+      Reset
+     </button>
+    </div>
+    <div id="info" style="width:35%;float:right">
+     <p>
+      &nbsp;&nbsp;&nbsp;The
+      <b>
+       Game of Life
+      </b>
+      , also known simply as
+      <b>
+       Life
+      </b>
+      ,
+          is a cellular automaton devised by the British mathematician John Horton Conway in 1970.
+     </p>
+     <p>
+      &nbsp;&nbsp;&nbsp;The "game" is a zero-player game,
+          meaning that its evolution is determined by its initial state,
+          requiring no further input.
+          One interacts with the Game of Life by creating an initial configuration and observing how it evolves.
+     </p>
+     <p>
+      &nbsp;&nbsp;&nbsp;Source :
+      <a href="http://en.wikipedia.org/wiki/Conway%27s_Game_of_Life">
+       Wikipedia
+      </a>
+     </p>
+    </div>
+   </div>
+   <div id="footer">
+    <p>
+     <!--   <a href="http://jigsaw.w3.org/css-validator/check/referer"> -->
+     <!--     <img style="border:0;width:88px;height:31px;float:right" -->
+     <!-- 	 src="http://jigsaw.w3.org/css-validator/images/vcss" -->
+     <!-- 	 alt="Valid CSS!"  /> -->
+     <!--   </a> -->
+     <a href="http://validator.w3.org/check?uri=referer">
+      <img style="border:0;width:88px;height:31px;float:right" src="http://www.w3.org/Icons/valid-xhtml11" alt="Valid XHTML 1.1" />
+     </a>
+    </p>
+   </div>
   </div>
-</body>
+ </body>
 </html>
-
