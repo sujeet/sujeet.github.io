@@ -1,3 +1,15 @@
+function bind (func, obj)
+{
+    // Returns a function in which the value of 
+    // "this" is obj
+    // Used for implementing callbacks
+    function binded (event)
+    {
+        func.call (obj, event);
+    }
+    return binded;
+}
+
 function Board (size,           // Number of cells in a row (square board)
                 cell_size,      // Side of cell in pixels (square cell)
                 live_color,
@@ -32,10 +44,10 @@ function Board (size,           // Number of cells in a row (square board)
 
     // Set up the canvas and its event handlers.
     this.canvas.width = this.canvas.height = size * cell_size;
-    this.canvas.addEventListener ("click", this._handle_canvas_click (this), false);
-    this.canvas.addEventListener ("mousedown", this._drag_start (this), false);
-    this.canvas.addEventListener ("mouseup", this._drag_end (this), false);
-    this.canvas.addEventListener ("mousemove", this._moved_over (this), false);
+    this.canvas.addEventListener ("click", bind (this._handle_canvas_click, this), false);
+    this.canvas.addEventListener ("mousedown", bind (this._drag_start, this), false);
+    this.canvas.addEventListener ("mouseup", bind (this._drag_end, this), false);
+    this.canvas.addEventListener ("mousemove", bind (this._moved_over, this), false);
 }
 
 Board.prototype._toggleCell = function (i, j)
@@ -104,46 +116,30 @@ Board.prototype._get_event_cell = function (event)
     return new Array (x, y);
 };
 
-Board.prototype._handle_canvas_click = function (board_obj)
+Board.prototype._handle_canvas_click = function (event)
 {
-    function handler (event)
-    {
-        var cell = board_obj._get_event_cell (event);
-        var x = cell [0], y = cell [1];
-        board_obj._toggleCellAndDisplay (x, y);
-    }
-    return handler;
+    var cell = this._get_event_cell (event);
+    var x = cell [0], y = cell [1];
+    this._toggleCellAndDisplay (x, y);
 };
 
-Board.prototype._drag_start = function (board_obj)
+Board.prototype._drag_start = function (event)
 {
-    function handler ()
-    {
-        board_obj.drag_on = true;
-    }
-    return handler;
+    this.drag_on = true;
 };
 
-Board.prototype._drag_end = function (board_obj)
+Board.prototype._drag_end = function (event)
 {
-    function handler ()
-    {
-        board_obj.drag_on = false;
-    }
-    return handler;
+    this.drag_on = false;
 };
 
-Board.prototype._moved_over = function (board_obj)
+Board.prototype._moved_over = function (event)
 {
-    function handler (event)
-    {
-        var cell = board_obj._get_event_cell (event);
-        var x = cell [0], y = cell [1];
-        if (board_obj.drag_on) {
-            board_obj._toggleCellAndDisplay (x, y);
-        }
+    var cell = this._get_event_cell (event);
+    var x = cell [0], y = cell [1];
+    if (this.drag_on) {
+        this._toggleCellAndDisplay (x, y);
     }
-    return handler;
 };
 
 Board.prototype._countNeighbours = function (i, j)
@@ -229,63 +225,43 @@ function Simulator (board_size,
 Simulator.prototype.attachEventHandlers = function ()
 {
     // Attach event handlers to the buttons.
-    this.playButton.addEventListener ("click", this._play_pushed (this), false);
-    this.pauseButton.addEventListener ("click", this._pause_pushed (this), false);
-    this.stepButton.addEventListener ("click", this._step_pushed (this), false);
-    this.resetButton.addEventListener ("click", this._reset_pushed (this), false);
+    this.playButton.addEventListener ("click", bind (this._play_pushed, this), false);
+    this.pauseButton.addEventListener ("click", bind (this._pause_pushed, this), false);
+    this.stepButton.addEventListener ("click", bind (this._step_pushed, this), false);
+    this.resetButton.addEventListener ("click", bind (this._reset_pushed, this), false);
     
 };
 
-Simulator.prototype.loop = function (simulator)
+Simulator.prototype.loop = function ()
 {
-    function loop_ ()
-    {
-        if (simulator.playing) {
-            simulator.board.simulateStep ();
-            simulator.timeoutVar = setTimeout (simulator.loop (simulator), 500);
-        }
+    if (this.playing) {
+        this.board.simulateStep ();
+        this.timeoutVar = setTimeout (bind (this.loop, this), 500);
     }
-    return loop_;
 };
 
-Simulator.prototype._play_pushed = function (simulator) 
+Simulator.prototype._play_pushed = function (event) 
 {
-    function play ()
-    {
-        simulator.playButton.innerHTML = "Faster";
-        simulator.playing = true;
-        simulator.loop (simulator)();
-    }
-    return play;
+    this.playButton.innerHTML = "Faster";
+    this.playing = true;
+    this.loop ();
 };
 
-Simulator.prototype._pause_pushed = function (simulator) 
+Simulator.prototype._pause_pushed = function (event) 
 {
-    function pause ()
-    {
-        simulator.playButton.innerHTML = "Play";
-        simulator.playing = false;
-    }
-    return pause;
+    this.playButton.innerHTML = "Play";
+    this.playing = false;
 };
 
-Simulator.prototype._step_pushed = function (simulator)
+Simulator.prototype._step_pushed = function (event)
 {
-    function step ()
-    {
-        simulator.board.simulateStep ();
-    }
-    return step;
+    this.board.simulateStep ();
 };
 
-Simulator.prototype._reset_pushed = function (simulator)
+Simulator.prototype._reset_pushed = function (event)
 {
-    function reset ()
-    {
-        simulator._pause_pushed (simulator);
-        simulator.board.reset ();
-    }
-    return reset;
+    this._pause_pushed (event);
+    this.board.reset ();
 };
 
 
