@@ -25,6 +25,12 @@ function Board (size,           // Number of cells in a row (square board)
     // is being dragged over the canvas.
     this.drag_on = false;
 
+    // Variables indicating the cell in which the
+    // mouse was the last time the mousemove event
+    // of the canvas was triggered.
+    this.previous_cell_x = -1;
+    this.previous_cell_y = -1;
+
     // Boolean 2d arrays indicating whether
     // the cell i, j is alive (true) or dead (false)
     this.board = new Array (size);
@@ -137,8 +143,16 @@ Board.prototype._moved_over = function (event)
 {
     var cell = this._get_event_cell (event);
     var x = cell [0], y = cell [1];
-    if (this.drag_on) {
-        this._toggleCellAndDisplay (x, y);
+
+    // Toggle only if it has entered the cell.
+    // If not done this way, even staying in a cell
+    // keeps on toggling the cell if the drag is on.
+    if ((x != this.previous_cell_x) || (y != this.previous_cell_y)) {
+        if (this.drag_on) {
+            this._toggleCellAndDisplay (x, y);
+        }
+        this.previous_cell_x = x;
+        this.previous_cell_y = y;
     }
 };
 
