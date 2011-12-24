@@ -1,21 +1,20 @@
+/* top right bottom left */
+
 body
 {
-    background  : url("../images/bg_darker.gif");
-    font-family : Tahoma, Helvetica, Arial, sans-serif;
-    color       : #edc;
+    background  : #6A818F;
+    font-family : Georgia, Verdana;
 }
 
 a,.link {
-    color           : #6bf;
+    color           : #099AF6;
     text-decoration : none;
 }
 
-h3, h1 {
+h3 {
     margin      : 30px 0px 10px 0px;
     font-weight : bold;
-    color       : #a86;
     text-shadow : 0px 1px 1px rgba(0,0,0,0.3);
-    font-family : Optima,"Trebuchet MS",sans-serif;
 }
 
 h3 {
@@ -26,17 +25,15 @@ h1 {
     text-align  : center;
     font-size   : 48px;
     text-shadow : 0px 1px 1px rgba(0,0,0,0.3);
+    color       : #000000;
     font-family : 'Redressed', cursive;
 }
 
 
 #headingbox {
-    background-image    : url("../images/spotlight2.jpg");
-    background-position : center top, left top;
-    background-repeat   : no-repeat, repeat;
-	margin              : 0px 0px 20px 0px;
-	border-radius       : 10px;
-  	height              : 160px;
+    background-image    : url("../images/sharp-corners-top.png");
+    background-repeat   : repeat-x;
+  	height              : 130px;
 }
 
 #heading {
@@ -44,8 +41,11 @@ h1 {
     width            : 97.8%;
     float            : left;
     margin           : 0px;
-    background-color : rgba(0,0,0,0.3);
     margin           : 0 12px;
+}
+
+#heading-hr {
+    width : 80%;
 }
 
 .rounded {
@@ -60,9 +60,10 @@ h1 {
 
 #menu {
     float                 : left;
-    width                 : 20%;
+    width                 : 18%;
     padding               : 5px 5px;
-    margin                : 0px 0;
+    margin                : 0px 0px 0px 15px;
+    border-right          : 1px solid black;
 }
 
 #menu ul {
@@ -74,20 +75,17 @@ h1 {
 #menu ul li a {
 	padding               : 5px 15px;
     margin                : 7px 0 0 0;
-  	color                 : #EEDDCC;
   	text-decoration       : none;
 	display               : block;
-	border-radius         : 5px;
-    background-color      : rgba(0,0,0,0.3);
+    border                : 1px solid #E2E2E2;
+    background-color      : #F3F3F3;
 }
 
 #menu ul li a:hover {
-  	color	   : #ffaa00;
-    box-shadow : 0px 0px 20px #FFAA00;
+    box-shadow : 0px 0px 20px #555;
 }
 
 #menu ul li a.externalLink:hover {
-  	color	   : #6bf;
     box-shadow : 0px 0px 20px #6bf;
 }
 
@@ -97,22 +95,24 @@ h1 {
 }
 
 #footer {
-	float : right;
-	width : 78%;
+	float            : right;
+	width            : 100%;
+    height           : 6px;
+    background-image : url("../images/sharp-corners-bottom.png");
+    margin           : 20px 0px 0px 0px;
 }
 
 #container 
 {
 	overflow              : auto;
-    background-color      : rgba(0,0,0,0.3);
-	padding               : 1em 1em 1em 1em;/* top right bottom left */
+    background-color      : #FFFFFF;
 	text-align            : left;
-	border-radius         : 10px;
 	min-width             : 800px;
 	max-width             : 1024px;
 	margin-left           : auto;
 	margin-right          : auto;
 	margin-top            : 20px;
+    box-shadow            : 2px 0px 0px #555;
 }
 
 

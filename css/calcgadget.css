@@ -1,32 +1,29 @@
 .calcButton {
 	padding               : 5px 15px;
     margin                : 7px 0 0 0;
-  	color                 : #EEDDCC;
+  	color                 : #099AF6;
   	text-decoration       : none;
 	display               : block;
-	border-radius         : 5px;
-    background-color      : rgba(0,0,0,0.3);
-    border-radius         : 5px;
+
+    border                : 1px solid #E2E2E2;
+    background-color      : #F3F3F3;
 
 	display               : inline-block;
 	vertical-align        : baseline;
 	margin                : 0 2px;
 	outline               : none;
-    border                : none;
 	cursor                : pointer;
 	text-align            : center;
 	text-decoration       : none;
 	padding               : .5em 2em .55em;
-	text-shadow           : 0 1px 1px rgba(0,0,0,.3);
 }
 
 .calcButton:hover{
-  	color	   : #ffaa00;
-    box-shadow : 0px 0px 20px #FFAA00;
+    box-shadow : 0px 0px 20px #6bf;
 }
 
 #calcgadget{
 	width : 180px;
-    border : 3px solid #221111;
+    border : 1px solid #221111;
 }
 

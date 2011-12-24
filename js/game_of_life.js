@@ -282,8 +282,8 @@ Simulator.prototype._reset_pushed = function (event)
 function init () {
     simulator = new Simulator (50,
                                9,
-                               "green",
-                               "black",
+                               "#099AF6",
+                               "#F3F3F3",
                                "game_of_life",
                                "play",
                                "pause",
