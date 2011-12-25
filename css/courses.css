@@ -1,0 +1,19 @@
+.semester, .course-name {
+    cursor : pointer;
+}
+
+.course-detail {
+    margin-bottom : 1em;
+}
+
+.semester {
+    background    : #F3F3F3;
+    border        : 1px solid #E2E2E2;
+    padding-left  : 20px;
+    margin-top    : 10px;
+    margin-bottom : 10px;
+}
+
+.courses {
+    display : none;
+}
