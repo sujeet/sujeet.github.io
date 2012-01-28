@@ -1,0 +1,37 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <script type="text/javascript" src="./ant_colony.js">
+  </script>
+  <title>
+    Ant colony
+  </title>
+ </head>
+
+ <body>
+     <canvas id="antsim_expl" style="z-index : 1; border : 1px solid #E2E2E2;">
+     </canvas>
+     <canvas id="antsim_trl" style="z-index : 2; border : 1px solid #E2E2E2;">
+     </canvas>
+     <canvas id="antsim_food" style="z-index : 3; border : 1px solid #E2E2E2;">
+     </canvas>
+     <canvas id="antsim_ants" style="z-index : 4; border : 1px solid #E2E2E2;">
+     </canvas>
+     <style>
+       canvas {
+       position : absolute;
+       left : 0px;
+       top  : 0px;
+       }
+     </style>
+    <script>
+      var simulator = new Simulator (10, 8, "antsim");
+      simulator.map.get_cell (3, 3).add_food (99);
+      <!-- simulator.map.get_cell (39, 9).add_food (99); -->
+      <!-- simulator.map.get_cell (20, 37).add_food (999); -->
+      <!-- simulator.map.get_cell (70, 57).add_food (999); -->
+      simulator.start ();
+    </script>
+ </body>
+</html>
