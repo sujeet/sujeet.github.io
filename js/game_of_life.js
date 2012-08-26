@@ -50,10 +50,18 @@ function Board (size,           // Number of cells in a row (square board)
 
     // Set up the canvas and its event handlers.
     this.canvas.width = this.canvas.height = size * cell_size;
-    this.canvas.addEventListener ("click", bind (this._handle_canvas_click, this), false);
-    this.canvas.addEventListener ("mousedown", bind (this._drag_start, this), false);
-    this.canvas.addEventListener ("mouseup", bind (this._drag_end, this), false);
-    this.canvas.addEventListener ("mousemove", bind (this._moved_over, this), false);
+    this.canvas.addEventListener ("click",
+                                  bind (this._handle_canvas_click, this), 
+                                  false);
+    this.canvas.addEventListener ("mousedown",
+                                   bind (this._drag_start, this),
+                                   false);
+    this.canvas.addEventListener ("mouseup",
+                                   bind (this._drag_end, this),
+                                   false);
+    this.canvas.addEventListener ("mousemove",
+                                   bind (this._moved_over, this),
+                                   false);
 }
 
 Board.prototype._toggleCell = function (i, j)
@@ -239,10 +247,18 @@ function Simulator (board_size,
 Simulator.prototype.attachEventHandlers = function ()
 {
     // Attach event handlers to the buttons.
-    this.playButton.addEventListener ("click", bind (this._play_pushed, this), false);
-    this.pauseButton.addEventListener ("click", bind (this._pause_pushed, this), false);
-    this.stepButton.addEventListener ("click", bind (this._step_pushed, this), false);
-    this.resetButton.addEventListener ("click", bind (this._reset_pushed, this), false);
+    this.playButton.addEventListener ("click",
+                                      bind (this._play_pushed, this),
+                                      false);
+    this.pauseButton.addEventListener ("click",
+                                       bind (this._pause_pushed, this),
+                                       false);
+    this.stepButton.addEventListener ("click",
+                                      bind (this._step_pushed, this), 
+                                      false);
+    this.resetButton.addEventListener ("click",
+                                       bind (this._reset_pushed, this), 
+                                       false);
     
 };
 

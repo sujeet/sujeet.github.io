@@ -1,37 +1,56 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
- <head>
-  <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
-  <script type="text/javascript" src="./ant_colony.js">
-  </script>
-  <title>
-    Ant colony
-  </title>
- </head>
-
- <body>
-     <canvas id="antsim_expl" style="z-index : 1; border : 1px solid #E2E2E2;">
-     </canvas>
-     <canvas id="antsim_trl" style="z-index : 2; border : 1px solid #E2E2E2;">
-     </canvas>
-     <canvas id="antsim_food" style="z-index : 3; border : 1px solid #E2E2E2;">
-     </canvas>
-     <canvas id="antsim_ants" style="z-index : 4; border : 1px solid #E2E2E2;">
-     </canvas>
-     <style>
-       canvas {
-       position : absolute;
-       left : 0px;
-       top  : 0px;
-       }
-     </style>
-    <script>
-      var simulator = new Simulator (10, 8, "antsim");
-      simulator.map.get_cell (3, 3).add_food (99);
-      <!-- simulator.map.get_cell (39, 9).add_food (99); -->
-      <!-- simulator.map.get_cell (20, 37).add_food (999); -->
-      <!-- simulator.map.get_cell (70, 57).add_food (999); -->
-      simulator.start ();
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <script type="text/javascript" src="./ant_colony.js">
     </script>
- </body>
+    <title> Ant Colony Simulation </title>
+    <style>
+      canvas {
+      position : absolute;
+      left : 400px;
+      top  : 0px;
+      display : block;
+      border : solid 1px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="container">
+      <canvas id="antsim_expl" style="z-index : 0;"> </canvas>
+      <canvas id="antsim_trl" style="z-index : 1;"> </canvas>
+      <canvas id="antsim_food" style="z-index : 2;"> </canvas>
+      <canvas id="antsim_ants" style="z-index : 3;"> </canvas>
+    </div>
+    <div>
+      <form name="control" method="get" action="" onsubmit="return false;">
+        Cell size in pixels : <input type="text" name="CELL_SIZE" value="3"/><br />
+        Width of map (in number of cells) : <input type="text" name="N_CELLS" value="150"/> <br/>
+        X coord of nest : <input type="text" name="HOME_X" value="75"/><br />
+        Y coord of nest : <input type="text" name="HOME_Y" value="75"/><br />
+      <button onclick="make_sim ()" id="prepare">
+        Make a map.
+      </button> <br/>
+      ======================= <br/>
+        <input type="checkbox" name="DIRECTIONLESS_ANTS" checked="checked" value="val" /> Directionless ants ?<br />
+        <input type="checkbox" name="SMELL_PREFERENCE" checked="checked" value="val" /> Prefer cells with stronger scent ?<br />
+        <input type="checkbox" name="TRAIL_VISIBLE" value="val" /> Show trail pheromone ?<br />
+        <input type="checkbox" name="EXPL_VISIBLE" value="val" /> Show exploration pheromone ?<br />
+      <br/>
+        What to draw ?
+        <br/>
+        <input type="radio" value="wall" name="drawables" id="wall" checked="checked"/> Wall
+        <br/>
+        <input type="radio" value="food" name="drawables" id="food"/> Food
+      </form>
+
+      <button onclick="start ()" id="play">
+        Start!
+      </button>
+      <br/>
+    </div>
+    <script>
+    </script>
+  </body>
 </html>

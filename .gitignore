@@ -11,3 +11,5 @@ media
 userportal/
 webbed_feet backup/
 webbed_feet/
+*backup
+*.directory
