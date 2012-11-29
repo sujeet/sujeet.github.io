@@ -1,0 +1,102 @@
+#console {
+    display              : block;
+    border               : solid 1px;
+    color                : white;
+    background-color     : black;
+    font-family          : monospace;
+    font-size            : 13px;
+    float                : right;
+    width                : 500px;
+}
+
+.label, #sentence, #rules-later, #rules {
+    font-family          : monospace;
+    font-size            : 20px;
+    width                : 100%;
+    color                : white;
+    background-color     : black;
+    border               : 2px solid white;
+    padding              : 10px 18px;
+}
+
+.button {
+        background-color : black;
+    border               : 2px solid orange;
+    border-radius        : 10px 10px 10px 10px;
+    color                : orange;
+    font-size            : 20px;
+    height               : 30px;
+    width                : 160px;
+}
+
+.inactive-button {
+    border-color         : grey;
+    color                : grey;
+}
+
+.label {
+    text-align           : center;
+    border               : none;
+    color                : green;
+}
+
+
+#rules, #rules-later {
+    height               : 510px;
+}
+
+.ruleBeingChecked {
+    color                : red;
+    text-shadow          : 0 0 5px red, 0 0 5px red;
+}
+
+.ruleMatched {
+    color                : green;
+    text-shadow          : 0 0 5px green, 0 0 1px green;
+}
+
+table {
+    border-collapse      : collapse;
+}
+
+#table {
+    float                : left;
+    margin-left          : 100px;
+}
+
+#table td {
+    border               : 1px solid white;
+    height               : 50px;
+    width                : 50px;
+    color                : white;
+    text-align           : center;
+}
+
+body {
+    background-color     : black;
+}
+
+.targetCell {
+    box-shadow           : 0 0 13px 2px magenta inset, 0 0 13px 2px magenta;
+}
+
+.oldTargetCell {
+    background           : #190919;
+}
+
+.cellUnderScanner {
+    box-shadow           : 0 0 13px 2px cyan inset, 0 0 13px 2px cyan;
+}
+
+.contentBeingChecked {
+    color                : red;
+}
+
+.contentMatched {
+    color                : green;
+}
+
+#left-column {
+    width                : 600px;
+    float : left;
+}

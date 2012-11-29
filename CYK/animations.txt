@@ -1,0 +1,18 @@
+checkRule -> makes any other red into non-red
+             makes this into red
+ruleMached -> makes this green
+resetRules -> takes away all colors of all rules
+
+setTargetCell -> makes this cell green
+                 de-greens any other cell
+setCellContent -> changes the content of the cell
+setCellUnderScanner -> make this cell grey
+removeUnderScanner -> make this cell non-grey
+                      remove any highlight from contents also
+                      remove any acceptance highlight from contents too
+
+checkCellContent -> highlites that thing in the cell.
+                    only one highlight possible.
+
+cellContentMatched -> put an acceptance highlight for the content.
+resetCellContents

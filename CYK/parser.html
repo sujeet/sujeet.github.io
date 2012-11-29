@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+    <title> CYK Parser Animation </title>
+    <script type="text/javascript" src="./jquery.js"></script>
+    <link type="text/CSS" rel="stylesheet" href="./style.css"></link>
+  </head>
+
+  <body>
+    <div id="left-column">
+      <table id="controls">
+        <tr>
+          <td> <button id="startButton" class="button"> Parse </button> </td>
+          <td>
+            <button id="back" class="button inactive-button">
+              &#9666;&#9666;
+            </button>
+          </td>
+          <td>
+            <button id="play" class="button inactive-button">
+              &#9656;
+            </button>
+          </td>
+          <td>
+            <button id="next" class="button inactive-button">
+              &#9656;&#9656;
+            </button>
+          </td>
+        </tr>
+      </table>
+      <div class="label">Sentence to Parse</div>
+      <input
+         id="sentence"
+         type="text"
+         >
+      </input>
+      <div class="label">Grammar Rules</div>
+      <textarea 
+         id="rules"
+         cols="50"></textarea>
+      <div
+         id="rules-later"
+         style="display:none;"
+         ></div>
+    </div>
+    <div id="console" style="display:none;"><pre style="margin:0px;"/></div>
+    <table id="table"></table>
+    <script type="text/javascript" src="./parser.js">
+    </script>
+  </body>
+</html>
