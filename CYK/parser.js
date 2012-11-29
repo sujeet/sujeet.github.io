@@ -613,3 +613,13 @@ function getGetParam (param) {
 
 $("#startButton")[0].onclick = start;
 timeout_value = getGetParam ('timeout') * 1;
+if ((example = getGetParam ('example'))) {
+    if (example == 1) {
+        $("#sentence")[0].value = "I saw the man with the telescope on the hill";
+        $("#rules")[0].value = "S -> NP VP \nNP -> DET N \nNP -> NP PP \nPP -> P NP \nVP -> V NP \nVP -> VP PP \nDET -> the \nNP -> I \nN -> man \nN -> telescope \nP -> with \nV -> saw \nN -> cat \nN -> dog \nN -> pig \nN -> hill \nN -> park \nN -> roof \nP -> from \nP -> on \nP -> in";
+    }
+    if (example == 2) {
+        $("#sentence")[0].value = "a b c d";
+        $("#rules")[0].value = "A -> a \nB -> b \nC -> c \nD -> d \nE -> A B \nF -> B C \nG -> C D \nH -> E F \nI -> F G \nS -> E G \nR -> A F \nT -> R D"
+    }
+}

@@ -29,6 +29,16 @@
     width                : 160px;
 }
 
+.example {
+    text-decoration      : none;
+    padding              : 0px 105px;
+}
+
+#examples {
+    width                : 640px;
+    margin-top           : 12px;
+}
+
 .inactive-button {
     border-color         : grey;
     color                : grey;
