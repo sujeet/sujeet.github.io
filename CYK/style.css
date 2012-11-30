@@ -74,6 +74,15 @@ table {
     margin-left          : 100px;
 }
 
+#table.rotated {
+    margin-top           : 120px;
+    transform       : rotate(-45deg);
+}
+
+#table td div.rotated {
+    transform       : rotate(45deg);
+}
+
 #table td {
     border               : 1px solid white;
     height               : 50px;

@@ -106,6 +106,11 @@ function Animator (parser,
     this.animations = new Array ();
     this.parser = parser;
     this.table = $("#table")[0];
+    this.childrenTable = {}; // Key is [x,y] cell coords
+                             // value is a list of quadruples
+                             // each is [x1, y1, x2, y2]
+                             // x1 y1 and x2 y2 cells are children of x y cell
+    if (rotate) table.classList.add ('rotated');
     
     // Transform the rule_textarea into a div with one rule per line.
     // Each rule having its own span.
@@ -122,6 +127,22 @@ function Animator (parser,
     
     this.visual_rules = uneditable_rules.getElementsByTagName ('span');
 }
+
+// Stores the fact that the cell at (x, y) is parent of
+// cells at (x1, y1) and (x2, y2) in the parse tree.
+// This information, can later be used to build a parse tree.
+Animator.prototype.addDerivation = function (x, y,
+                                             x1, y1,
+                                             x2, y2) {
+    if ([x,y] in this.childrenTable) {
+        this.childrenTable [[x,y]] = this.childrenTable [[x,y]].push (
+            [x1, y1, x2, y2]
+        );
+    }
+    else {
+        this.childrenTable [[x,y]] = [[x1, y1, x2, y2]];
+    }
+};
 
 Animator.prototype.createTable = function (words) {
     // Make a table based on the sentence and parse_table.
@@ -266,8 +287,13 @@ Animator.prototype.setCellContent = function (x, y, array_of_strings) {
         invoke : function () {
             this.old_content = animator.getCell (x, y).innerHTML;
             var inner_markup = "";
+            var rotation_class = rotate ? "rotated" : "";
             for (var i = 0; i < array_of_strings.length; ++i) {
-                inner_markup += "<span>" + array_of_strings [i] + "</span>, ";
+                inner_markup += (
+                    "<div class='" + rotation_class + "'>"
+                        + array_of_strings [i] 
+                        + "</div>, "
+                );
             }
             animator.getCell (x, y).innerHTML = inner_markup.substr (
                 0,
@@ -318,7 +344,7 @@ Animator.prototype.checkCellContent = function (x, y, content) {
         old_content : null,
         invoke : function () {
             var cell = animator.getCell (x, y);
-            var content_list = cell.getElementsByTagName ('span');
+            var content_list = cell.getElementsByTagName ('div');
             for (var i = 0; i < content_list.length; ++i) {
                 if (content_list [i].classList.contains (
                         'contentBeingChecked')
@@ -336,7 +362,7 @@ Animator.prototype.checkCellContent = function (x, y, content) {
         },
         revert : function () {
             var cell = animator.getCell (x, y);
-            var content_list = cell.getElementsByTagName ('span');
+            var content_list = cell.getElementsByTagName ('div');
             for (var i = 0; i < content_list.length; ++i) {
                 content_list [i].classList.remove (
                     'contentBeingChecked'
@@ -355,7 +381,7 @@ Animator.prototype.cellContentMatched = function (x, y, content) {
     var animation = {
         invoke : function () {
             var cell = animator.getCell (x, y);
-            var content_list = cell.getElementsByTagName ('span');
+            var content_list = cell.getElementsByTagName ('div');
             for (var i = 0; i < content_list.length; ++i) {
                 if (content_list [i].innerHTML == content) {
                     content_list [i].classList.add ('contentMatched');
@@ -365,7 +391,7 @@ Animator.prototype.cellContentMatched = function (x, y, content) {
         },
         revert : function () {
             var cell = animator.getCell (x, y);
-            var content_list = cell.getElementsByTagName ('span');
+            var content_list = cell.getElementsByTagName ('div');
             for (var i = 0; i < content_list.length; ++i) {
                 if (content_list [i].innerHTML == content) {
                     content_list [i].classList.remove ('contentMatched');
@@ -385,7 +411,7 @@ Animator.prototype.resetCellContents = function (x, y) {
         invoke : function () {
             var cell = animator.getCell (x, y);
             this.old_cell_content = cell.innerHTML;
-            var content_list = cell.getElementsByTagName ('span');
+            var content_list = cell.getElementsByTagName ('div');
             for (var i = 0; i < content_list.length; ++i) {
                 content_list [i].classList.remove ('contentMatched');
                 content_list [i].classList.remove ('contentBeingChecked');
@@ -471,6 +497,7 @@ Parser.prototype.fillOneCell = function ()
                         this.animator.cellContentMatched (x, i-1, RHS1 [r1]);
                         this.animator.cellContentMatched (i, y, RHS2 [r2]);
                         this.animator.ruleMatched (rul_no);
+                        this.animator.addDerivation (x, y, x, i-1, i, y);
                         this.parse_table [x] [y].pushUnique (rule.LHS);
                         this.animator.setCellContent (
                             x,
@@ -611,6 +638,8 @@ function getGetParam (param) {
     return null;
 }
 
+rotate = false;
+if (getGetParam ('rotate')) rotate = true;
 $("#startButton")[0].onclick = start;
 timeout_value = getGetParam ('timeout') * 1;
 if ((example = getGetParam ('example'))) {
@@ -620,6 +649,6 @@ if ((example = getGetParam ('example'))) {
     }
     if (example == 2) {
         $("#sentence")[0].value = "a b c d";
-        $("#rules")[0].value = "A -> a \nB -> b \nC -> c \nD -> d \nE -> A B \nF -> B C \nG -> C D \nH -> E F \nI -> F G \nS -> E G \nR -> A F \nT -> R D"
+        $("#rules")[0].value = "A -> a \nB -> b \nC -> c \nD -> d \nE -> A B \nF -> B C \nG -> C D \nH -> E F \nI -> F G \nS -> E G \nR -> A F \nT -> R D";
     }
 }
